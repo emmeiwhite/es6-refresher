@@ -90,8 +90,11 @@ console.log(person.age)
  *
  * person = {} // This is a Type Error this time, not a syntax error. Assignment to a constant variable
  */
-
-person = {} // This is a TypeError:
+try {
+  person = {} // This is a TypeError:
+} catch (error) {
+  console.log('TypeError: Handled (An assignment to the const variable)')
+}
 
 /* 
 Type errors occur when we try to perform a wrong operation on a datatype
@@ -100,3 +103,17 @@ b) When we try to call a non-function as a function. e.g, let x = 2; x();
 c) When we try to access the properties of null & undefined
 d) When we try use an incorrect method on a type. e.g, let num = 2; num.toUppercase();
 */
+
+const numbers = [1, 2, 3]
+console.log(numbers) // Output: [1, 2, 3]
+
+// Modifying array elements is allowed
+numbers.push(4)
+console.log(numbers) // Output: [1, 2, 3, 4]
+
+try {
+  // Attempting to reassign the variable will throw an error
+  numbers = [] // Throws TypeError: Assignment to constant variable.
+} catch (error) {
+  console.log('TypeError: Handled assignment to a const variable')
+}
