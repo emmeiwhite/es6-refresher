@@ -66,4 +66,37 @@ let foo = 10
 /** Trying to re-declare foo results in a syntax error, which stops whole program execution, in fact it occurs during the compile time even in partially compiled languages like javaScript */
 console.log(foo) // Output : Error;
 
-const hello; // Again a syntax error which results in termination of JS Program
+/*
+const hello; 
+// Again a syntax error which results in termination of JS Program
+*/
+
+/* ---
+const
+- In JavaScript, the const keyword is used to declare constants. Constants are variables whose values cannot be reassigned once they are initialized. This means that once a value is assigned to a constant using const, it cannot be changed or reassigned throughout the execution of the script.
+
+- values declared with const cannot be modified. But if the value is an object or an array the properties of these complex data types can easily be modified .
+--- */
+const person = {
+  name: 'Mayank',
+  age: 30
+}
+
+console.log(person.name)
+console.log(person.age)
+
+// Attempting to reassign the whole object will result in an error
+/** For Example:
+ *
+ * person = {} // This is a Type Error this time, not a syntax error. Assignment to a constant variable
+ */
+
+person = {} // This is a TypeError:
+
+/* 
+Type errors occur when we try to perform a wrong operation on a datatype
+a) When trying to reassign a const
+b) When we try to call a non-function as a function. e.g, let x = 2; x();
+c) When we try to access the properties of null & undefined
+d) When we try use an incorrect method on a type. e.g, let num = 2; num.toUppercase();
+*/
