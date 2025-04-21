@@ -17,8 +17,15 @@ function foo() {
 /** REMEMBER: For clean code, avoid writing code where hoisting happens */
 
 // NOTE: let, const and function expressions declared with them are not hoisted
-
+/*
 shoutOut() // RE: cannot access shoutOut before initialization
 const shoutOut = function () {
   console.log('Imran is a wonderful programmer')
-}
+}*/
+
+/* --- 
+console.log(x)
+let x = 23
+
+const y; // Here we get a syntax error and whole program is not executed at all.
+--- */

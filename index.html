@@ -6,8 +6,60 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0" />
     <title>ES6 Refresher</title>
+    <link
+      rel="stylesheet"
+      href="./style.css" />
   </head>
   <body>
+    <header>
+      <h1>Let's Learn JavaScript together</h1>
+    </header>
+
+    <main class="main-content">
+      <aside>
+        <ul>
+          <li><a href="#hoisting">Hoisting</a></li>
+          <li><a href="#callstack">Call Stack</a></li>
+          <li><a href="#first-class-citizens">Functions as first class citizens</a></li>
+        </ul>
+      </aside>
+
+      <section>
+        <article id="hoisting">
+          <h2>Hoisting</h2>
+
+          <p>
+            Hoisting in JavaScript is a behavior where variable and function declarations are moved
+            to the top of their containing scope during the compile phase. This means you can use
+            variables and functions before you declare them in the code. However, only the
+            declarations are hoisted, not the initializations. For example, with variables declared
+            using
+            <strong>var</strong>
+            , the declaration is hoisted, but the assignment remains in place. This can lead to
+            <strong>undefined</strong>
+            values if you try to access the variable before it's initialized. Functions declared
+            with the
+            <strong>function</strong>
+            keyword are fully hoisted, meaning you can call them before their declaration in the
+            code.
+          </p>
+        </article>
+
+        <article id="callstack">
+          <h2>Call Stack</h2>
+        </article>
+
+        <article id="first-class-citizens">
+          <h2>First Class Citizens</h2>
+        </article>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; Copyright; Imran Rafiq Rather,</p>
+      All Rights reserved 2025
+    </footer>
+
     <script
       src="./script.js"
       type="module"></script>

@@ -1,0 +1,73 @@
+/* CSS Reset */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Root Custom Variables */
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #2ecc71;
+  --background-color: #f4f4f9;
+  --text-color: #333;
+  --font-family: 'Arial', sans-serif;
+  --max-width: 1200px;
+  --padding: 1rem;
+}
+
+/* Global Styles */
+body {
+  font-family: var(--font-family);
+  color: var(--text-color);
+  background-color: var(--background-color);
+  line-height: 1.6;
+}
+
+header {
+  background-color: var(--primary-color);
+  color: white;
+  padding: var(--padding);
+  text-align: center;
+}
+
+.main-content {
+  display: flex;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--padding);
+}
+
+aside {
+  flex: 1;
+  padding-right: var(--padding);
+}
+
+section {
+  flex: 3;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+footer {
+  background-color: var(--primary-color);
+  color: white;
+  text-align: center;
+  padding: var(--padding);
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
