@@ -16,7 +16,7 @@
     </header>
 
     <main class="main-content">
-      <aside>
+      <aside class="topics">
         <ul>
           <li><a href="#hoisting">Hoisting</a></li>
           <li><a href="#callstack">Call Stack</a></li>
@@ -26,7 +26,7 @@
 
       <section>
         <article id="hoisting">
-          <h2>Hoisting</h2>
+          <h2 class="section-heading">Hoisting</h2>
 
           <p>
             Hoisting in JavaScript is a behavior where variable and function declarations are moved
@@ -43,14 +43,152 @@
             keyword are fully hoisted, meaning you can call them before their declaration in the
             code.
           </p>
+
+          <br />
+
+          <p>
+            When it comes to
+            <strong>let</strong>
+            ,
+            <strong>const</strong>
+            , and function expressions, hoisting behaves differently compared to var and function
+            declarations:
+          </p>
+
+          <ul>
+            <li>
+              1.
+              <strong>let and const:</strong>
+              These are also hoisted, but they are not initialized. This means they are in a
+              "temporal dead zone" from the start of the block until the declaration is encountered.
+              If you try to access them before their declaration, you'll get a ReferenceError. This
+              behavior helps prevent some common bugs associated with var.
+            </li>
+            <br />
+            <li>
+              2.
+              <strong>Function Expressions:</strong>
+              If you assign a function to a variable using a function expression
+              <code>(e.g., const myFunc = function() {}),</code>
+              the variable itself is hoisted, but like let and const, it is not initialized until
+              the assignment is executed. This means you cannot call the function before the line
+              where it is defined, or you'll get a TypeError because the variable is not yet a
+              function. In summary, while let, const, and function expressions are technically
+              hoisted, they are not initialized until their declaration is reached, which prevents
+              their use before that point in the code.
+            </li>
+          </ul>
         </article>
 
+        <!-- call stack -->
         <article id="callstack">
-          <h2>Call Stack</h2>
+          <h2 class="section-heading">Call Stack</h2>
+          <p>
+            The
+            <strong>call stack</strong>
+            is a data structure that keeps track of function calls in a program. It operates in a
+            <em>Last In, First Out</em>
+            (LIFO) manner, meaning the last function added to the stack is the first one to be
+            executed and removed. Here's how it works:
+          </p>
+          <br />
+          <ul>
+            <li>
+              <strong>Function Invocation:</strong>
+              When a function is called, a new execution context is created and pushed onto the call
+              stack.
+            </li>
+            <br />
+            <li>
+              <strong>Execution:</strong>
+              The function executes, and any functions it calls are added to the stack.
+            </li>
+            <br />
+            <li>
+              <strong>Completion:</strong>
+              Once a function completes, its execution context is popped off the stack, and control
+              returns to the previous context.
+            </li>
+          </ul>
+
+          <br />
+          <p>
+            The call stack helps manage the order of function execution and is crucial for handling
+            synchronous operations. If the stack grows too large (e.g., due to excessive recursion),
+            it can lead to a
+            <strong>stack overflow</strong>
+            error.
+          </p>
+          <br />
+          <h3>Execution Context</h3>
+          <p>
+            An
+            <strong>execution context</strong>
+            is an environment where JavaScript code is evaluated and executed. There are three main
+            types of execution contexts:
+          </p>
+
+          <br />
+          <ul>
+            <li>
+              <strong>Global Execution Context:</strong>
+              This is the default context where code starts executing. It creates the global object
+              (
+              <code>window</code>
+              in browsers) and sets up the global scope.
+            </li>
+            <br />
+            <li>
+              <strong>Function Execution Context:</strong>
+              Each time a function is invoked, a new execution context is created for that function.
+              It includes:
+              <ul>
+                <li>
+                  <strong>Variable Object (VO):</strong>
+                  Contains function arguments, local variables, and function declarations.
+                </li>
+                <li>
+                  <strong>Scope Chain:</strong>
+                  References the current variable object and its parent scopes, allowing access to
+                  variables in outer scopes.
+                </li>
+                <li>
+                  <strong>
+                    <code>this</code>
+                    Binding:
+                  </strong>
+                  Determines the value of
+                  <code>this</code>
+                  within the function.
+                </li>
+              </ul>
+            </li>
+            <br />
+            <li>
+              <strong>Eval Execution Context:</strong>
+              Created when code is executed inside an
+              <code>eval</code>
+              function. It's less commonly used and generally discouraged due to security and
+              performance concerns.
+            </li>
+          </ul>
+
+          <br />
+          <p>
+            Execution contexts are created in two phases: the creation phase (where the scope chain,
+            variable object, and
+            <code>this</code>
+            are set up) and the execution phase (where code is executed line by line).
+          </p>
+          <br />
+          <p>
+            Understanding the call stack and execution context helps in debugging, optimizing code,
+            and understanding how JavaScript handles function calls and scope.
+          </p>
         </article>
 
         <article id="first-class-citizens">
-          <h2>First Class Citizens</h2>
+          <h2 class="section-heading">First Class Citizens</h2>
         </article>
       </section>
     </main>
