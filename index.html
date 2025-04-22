@@ -19,65 +19,210 @@
       <aside class="topics">
         <ul>
           <li><a href="#hoisting">Hoisting</a></li>
+          <li><a href="#temporal-dead-zone">Temporal Dead Zone</a></li>
           <li><a href="#callstack">Call Stack</a></li>
           <li><a href="#first-class-citizens">Functions as first class citizens</a></li>
+          <li><a href="#closures">Closures</a></li>
         </ul>
       </aside>
 
       <section>
+        <!-- hoisting -->
         <article id="hoisting">
           <h2 class="section-heading">Hoisting</h2>
-
           <p>
-            Hoisting in JavaScript is a behavior where variable and function declarations are moved
-            to the top of their containing scope during the compile phase. This means you can use
-            variables and functions before you declare them in the code. However, only the
-            declarations are hoisted, not the initializations. For example, with variables declared
-            using
-            <strong>var</strong>
-            , the declaration is hoisted, but the assignment remains in place. This can lead to
-            <strong>undefined</strong>
-            values if you try to access the variable before it's initialized. Functions declared
-            with the
-            <strong>function</strong>
-            keyword are fully hoisted, meaning you can call them before their declaration in the
-            code.
+            <strong>Hoisting</strong>
+            is a JavaScript mechanism where variable and function declarations are moved to the top
+            of their containing scope during the compile phase. This means you can use variables and
+            functions before you declare them in the code. However, only the declarations are
+            hoisted, not the initializations.
           </p>
-
+          <h3>
+            Variables Declared with
+            <code>var</code>
+          </h3>
+          <p>
+            Variables declared with
+            <code>var</code>
+            are hoisted to the top of their function or global scope. However, their initialization
+            remains in place, which can lead to
+            <code>undefined</code>
+            values if accessed before initialization.
+          </p>
+          <p>
+            <strong>Example:</strong>
+          </p>
+          <pre><code>
+  console.log(myVar); // undefined
+  var myVar = 5;
+  console.log(myVar); // 5
+  </code></pre>
+          <p>
+            In the example above, the declaration of
+            <code>myVar</code>
+            is hoisted, but its initialization is not, resulting in
+            <code>undefined</code>
+            when accessed before the assignment.
+          </p>
           <br />
-
+          <h3>Function Declarations</h3>
           <p>
-            When it comes to
-            <strong>let</strong>
-            ,
-            <strong>const</strong>
-            , and function expressions, hoisting behaves differently compared to var and function
-            declarations:
+            Function declarations are fully hoisted, meaning you can call the function before its
+            declaration in the code.
           </p>
+          <p>
+            <strong>Example:</strong>
+          </p>
+          <pre><code>
+  console.log(myFunction()); // "Hello, World!"
 
-          <ul>
-            <li>
-              1.
-              <strong>let and const:</strong>
-              These are also hoisted, but they are not initialized. This means they are in a
-              "temporal dead zone" from the start of the block until the declaration is encountered.
-              If you try to access them before their declaration, you'll get a ReferenceError. This
-              behavior helps prevent some common bugs associated with var.
-            </li>
-            <br />
-            <li>
-              2.
-              <strong>Function Expressions:</strong>
-              If you assign a function to a variable using a function expression
-              <code>(e.g., const myFunc = function() {}),</code>
-              the variable itself is hoisted, but like let and const, it is not initialized until
-              the assignment is executed. This means you cannot call the function before the line
-              where it is defined, or you'll get a TypeError because the variable is not yet a
-              function. In summary, while let, const, and function expressions are technically
-              hoisted, they are not initialized until their declaration is reached, which prevents
-              their use before that point in the code.
-            </li>
-          </ul>
+  function myFunction() {
+    return "Hello, World!";
+  }
+  </code></pre>
+          <p>
+            In this example, the function
+            <code>myFunction</code>
+            is hoisted, allowing it to be called before its declaration.
+          </p>
+          <br />
+          <h3>
+            Variables Declared with
+            <code>let</code>
+            and
+            <code>const</code>
+          </h3>
+          <p>
+            Unlike
+            <code>var</code>
+            , variables declared with
+            <code>let</code>
+            and
+            <code>const</code>
+            are hoisted but not initialized, leading to a
+            <code>ReferenceError</code>
+            if accessed before their declaration.
+          </p>
+          <p>
+            <strong>Example:</strong>
+          </p>
+          <pre><code>
+  console.log(myLetVar); // ReferenceError
+  let myLetVar = 10;
+  </code></pre>
+          <p>
+            In this example,
+            <code>myLetVar</code>
+            is hoisted but not initialized, resulting in a
+            <code>ReferenceError</code>
+            when accessed before its declaration.
+          </p>
+          <br />
+          <p>
+            Understanding hoisting is essential for writing predictable and bug-free JavaScript
+            code. It helps in understanding the order of execution and the scope of variables and
+            functions.
+          </p>
+        </article>
+
+        <!-- Temporal Dead Zone -->
+        <article id="temporal-dead-zone">
+          <h2 class="section-heading">Temporal Dead Zone (TDZ)</h2>
+          <p>
+            The
+            <strong>Temporal Dead Zone (TDZ)</strong>
+            is a behavior in JavaScript that affects variables declared with
+            <code>let</code>
+            ,
+            <code>const</code>
+            , and
+            <code>class</code>
+            . It refers to the period between the start of a block and the point where the variable
+            is declared and initialized.
+          </p>
+          <p>
+            During this period, the variable is in a "dead zone" and cannot be accessed, leading to
+            a
+            <code>ReferenceError</code>
+            if you try to use it. This behavior helps prevent errors and encourages better coding
+            practices.
+          </p>
+          <h3>
+            Variables Declared with
+            <code>let</code>
+            and
+            <code>const</code>
+          </h3>
+          <p>
+            Both
+            <code>let</code>
+            and
+            <code>const</code>
+            are block-scoped, meaning they are only accessible within the block they are declared
+            in. They are hoisted to the top of their block, but they are not initialized until the
+            declaration is encountered.
+          </p>
+          <p>
+            <strong>Example:</strong>
+          </p>
+          <pre><code>
+  {
+    // TDZ starts
+    console.log(myVar); // ReferenceError
+    let myVar = 10; // TDZ ends
+    console.log(myVar); // 10
+  }
+  </code></pre>
+          <p>
+            In the example above,
+            <code>myVar</code>
+            is in the TDZ until the line where it is declared.
+          </p>
+          <br />
+          <h3>Classes</h3>
+          <p>
+            Similar to
+            <code>let</code>
+            and
+            <code>const</code>
+            ,
+            <code>class</code>
+            declarations are also hoisted but not initialized. Attempting to access a class before
+            its declaration will result in a
+            <code>ReferenceError</code>
+            .
+          </p>
+          <p>
+            <strong>Example:</strong>
+          </p>
+          <pre><code>
+  {
+    // TDZ starts
+    const obj = new MyClass(); // ReferenceError
+    class MyClass {
+      constructor() {
+        this.name = 'Example';
+      }
+    }
+    // TDZ ends
+  }
+  </code></pre>
+          <p>
+            In this example,
+            <code>MyClass</code>
+            is in the TDZ until its declaration is encountered.
+          </p>
+          <br />
+          <p>
+            Understanding the TDZ is crucial for avoiding common pitfalls when using
+            <code>let</code>
+            ,
+            <code>const</code>
+            , and
+            <code>class</code>
+            in JavaScript. It ensures that variables are not accessed before they are properly
+            initialized.
+          </p>
         </article>
 
         <!-- call stack -->
@@ -189,12 +334,244 @@
           </p>
         </article>
 
+        <!-- Functions as First-Class-Citizens -->
         <article id="first-class-citizens">
-          <h2 class="section-heading">First Class Citizens</h2>
+          <h2 class="section-heading">Functions as First-Class Citizens</h2>
+          <p>
+            In JavaScript, functions are treated as
+            <strong>first-class citizens</strong>
+            . This means that functions can be assigned to variables, passed as arguments to other
+            functions, and returned from other functions. This flexibility allows for powerful
+            programming patterns and techniques.
+          </p>
+          <h3>Assigning Functions to Variables</h3>
+          <p>
+            Functions can be assigned to variables, allowing them to be stored and passed around
+            like any other value.
+          </p>
+          <p>
+            <strong>Example:</strong>
+          </p>
+          <pre><code>
+  const greet = function(name) {
+    return `Hello, ${name}!`;
+  };
+
+  console.log(greet("Alice")); // "Hello, Alice!"
+  </code></pre>
+          <p>
+            In this example, the function is assigned to the variable
+            <code>greet</code>
+            , which can then be used to call the function.
+          </p>
+          <br />
+          <h3>Passing Functions as Arguments</h3>
+          <p>
+            Functions can be passed as arguments to other functions, enabling higher-order functions
+            and callbacks.
+          </p>
+          <p>
+            <strong>Example:</strong>
+          </p>
+          <pre><code>
+  function performOperation(a, b, operation) {
+    return operation(a, b);
+  }
+
+  const add = (x, y) => x + y;
+  const result = performOperation(5, 3, add);
+
+  console.log(result); // 8
+  </code></pre>
+          <p>
+            Here, the
+            <code>add</code>
+            function is passed as an argument to
+            <code>performOperation</code>
+            , demonstrating how functions can be used as callbacks.
+          </p>
+          <br />
+          <h3>Returning Functions from Other Functions</h3>
+          <p>
+            Functions can also be returned from other functions, allowing for the creation of
+            function factories and closures.
+          </p>
+          <p>
+            <strong>Example:</strong>
+          </p>
+          <pre><code>
+  function createMultiplier(multiplier) {
+    return function(number) {
+      return number * multiplier;
+    };
+  }
+
+  const double = createMultiplier(2);
+  console.log(double(5)); // 10
+  </code></pre>
+          <p>
+            In this example,
+            <code>createMultiplier</code>
+            returns a new function that multiplies its input by a specified multiplier,
+            demonstrating the use of closures.
+          </p>
+          <br />
+          <p>
+            Understanding functions as first-class citizens is fundamental to leveraging
+            JavaScript's functional programming capabilities, enabling more abstract and flexible
+            code.
+          </p>
+        </article>
+
+        <!-- Closures -->
+        <article id="closures">
+          <h2 class="section-heading">Closures</h2>
+          <p>
+            A
+            <strong>closure</strong>
+            is a feature in JavaScript where an inner function has access to its outer enclosing
+            function's variables and parameters, even after the outer function has finished
+            executing. Closures are created every time a function is created, at function creation
+            time.
+          </p>
+          <h3>How Closures Work</h3>
+          <p>
+            Closures allow a function to access variables from an outer function's scope chain. This
+            includes:
+          </p>
+          <ul>
+            <li>Variables declared in the outer function's scope.</li>
+            <li>Parameters of the outer function.</li>
+            <li>Variables from the global scope.</li>
+          </ul>
+          <p>
+            <strong>Example:</strong>
+          </p>
+          <pre><code>
+  function outerFunction(outerVariable) {
+    return function innerFunction(innerVariable) {
+      console.log('Outer Variable:', outerVariable);
+      console.log('Inner Variable:', innerVariable);
+    };
+  }
+
+  const newFunction = outerFunction('outside');
+  newFunction('inside');
+  // Output:
+  // Outer Variable: outside
+  // Inner Variable: inside
+  </code></pre>
+          <p>
+            In this example,
+            <code>innerFunction</code>
+            forms a closure that captures
+            <code>outerVariable</code>
+            from
+            <code>outerFunction</code>
+            's scope.
+          </p>
+          <br />
+          <h3>Use-Cases of Closures</h3>
+          <h4>1. Data Privacy</h4>
+          <p>
+            Closures can be used to create private variables or methods. This is useful for
+            encapsulating data and preventing it from being accessed directly from outside the
+            function.
+          </p>
+          <p>
+            <strong>Example:</strong>
+          </p>
+          <pre><code>
+  function createCounter() {
+    let count = 0;
+    return {
+      increment: function() {
+        count++;
+        return count;
+      },
+      decrement: function() {
+        count--;
+        return count;
+      }
+    };
+  }
+
+  const counter = createCounter();
+  console.log(counter.increment()); // 1
+  console.log(counter.decrement()); // 0
+  </code></pre>
+          <p>
+            Here,
+            <code>count</code>
+            is a private variable that can only be modified through the
+            <code>increment</code>
+            and
+            <code>decrement</code>
+            methods.
+          </p>
+          <br />
+          <h4>2. Function Factories</h4>
+          <p>
+            Closures can be used to create function factories, which generate functions with
+            pre-configured settings or behaviors.
+          </p>
+          <p>
+            <strong>Example:</strong>
+          </p>
+          <pre><code>
+  function createAdder(x) {
+    return function(y) {
+      return x + y;
+    };
+  }
+
+  const addFive = createAdder(5);
+  console.log(addFive(10)); // 15
+  </code></pre>
+          <p>
+            In this example,
+            <code>createAdder</code>
+            returns a new function that adds a specific number to its argument, demonstrating how
+            closures can be used to configure functions.
+          </p>
+          <br />
+          <h4>3. Maintaining State in Asynchronous Code</h4>
+          <p>
+            Closures are often used in asynchronous programming to maintain state across
+            asynchronous operations.
+          </p>
+          <p>
+            <strong>Example:</strong>
+          </p>
+          <pre><code>
+  function delayedGreeting(name) {
+    setTimeout(function() {
+      console.log('Hello, ' + name);
+    }, 1000);
+  }
+
+  delayedGreeting('Alice');
+  // After 1 second: "Hello, Alice"
+  </code></pre>
+          <p>
+            Here, the closure allows the
+            <code>setTimeout</code>
+            callback to access the
+            <code>name</code>
+            variable even after
+            <code>delayedGreeting</code>
+            has finished executing.
+          </p>
+          <br />
+          <p>
+            Understanding closures is crucial for mastering JavaScript, as they enable powerful
+            patterns and techniques for managing scope, state, and data privacy.
+          </p>
         </article>
       </section>
     </main>
 
+    <!-- Footer -->
     <footer>
       <p>&copy; Copyright; Imran Rafiq Rather,</p>
       All Rights reserved 2025

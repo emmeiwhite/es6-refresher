@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      .grid-container {
+        display: grid;
+
+        @media (min-width: 960px) {
+          grid-template-columns: 1fr 300px;
+        }
+      }
+
+      section {
+        border: 2px dashed #333;
+        display: grid;
+        place-content: center;
+      }
+
+      .one {
+        min-height: 250px;
+        @media (min-width: 960px) {
+          height: 400px;
+        }
+      }
+
+      .two {
+        height: 80px;
+      }
+
+      .three {
+        height: 60px;
+        @media (min-width: 600px) {
+          grid-row: 5;
+        }
+      }
+
+      .four {
+        min-height: 500px;
+        @media (min-width: 960px) {
+          grid-column: 2/3;
+          grid-row: 1;
+          min-height: 100vh;
+        }
+      }
+
+      .five {
+        height: 60px;
+        @media (min-width: 600px) {
+          grid-row: 3/4;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="grid-container">
+      <section class="one">1</section>
+      <section class="two">2</section>
+      <section class="three">3</section>
+      <section class="four">4</section>
+      <section class="five">5</section>
+    </main>
+  </body>
+</html>
