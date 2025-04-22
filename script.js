@@ -29,3 +29,10 @@ let x = 23
 
 const y; // Here we get a syntax error and whole program is not executed at all.
 --- */
+
+/** 2. FUNCTIONS ARE CONSIDERED FIRST CLASS CITIZENS IN JAVASCRIPT
+ * a) We can assign a function to a variable (as is the case with Function Expressions)
+ * b) We can pass function reference as a parameter to another function and call it within another function
+ * c) We can return a function from another function(A concept which lays down foundations for Closures)
+ * Primarily in JavaScript we should think of Function as a value as stated in the book Eloquent JavaScript
+ */

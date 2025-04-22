@@ -142,7 +142,7 @@
               <strong>Function Execution Context:</strong>
               Each time a function is invoked, a new execution context is created for that function.
               It includes:
-              <ul>
+              <ol>
                 <li>
                   <strong>Variable Object (VO):</strong>
                   Contains function arguments, local variables, and function declarations.
@@ -161,7 +161,7 @@
                   <code>this</code>
                   within the function.
                 </li>
-              </ul>
+              </ol>
             </li>
             <br />
             <li>
@@ -175,10 +175,12 @@
 
           <br />
           <p>
-            Execution contexts are created in two phases: the creation phase (where the scope chain,
-            variable object, and
+            Execution contexts are created in two phases:
+            <br />
+            1. the creation phase (where the scope chain, variable object, and
             <code>this</code>
-            are set up) and the execution phase (where code is executed line by line).
+            <br />
+            2. are set up) and the execution phase (where code is executed line by line).
           </p>
           <br />
           <p>
